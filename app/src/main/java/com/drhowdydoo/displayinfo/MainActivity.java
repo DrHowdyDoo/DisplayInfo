@@ -89,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
     private String ratio(float a, float b) {
         //final int gcd = gcd(a,b);
         DecimalFormat format = new DecimalFormat("#");
+        DecimalFormat format2 = new DecimalFormat("#.#");
         final float gcd = 120;
         if(a > b) {
-            return a/gcd + " : " + format.format(b/gcd);
+            return format2.format(a/gcd) + " : " + format.format(b/gcd);
         } else {
-            return b/gcd + " : " + format.format(a/gcd);
+            return format2.format(b/gcd) + " : " + format.format(a/gcd);
         }
     }
 
@@ -139,14 +140,19 @@ public class MainActivity extends AppCompatActivity {
         int[] hdr = display.getHdrCapabilities().getSupportedHdrTypes();
         StringBuilder hdrCapabilities = new StringBuilder();
 
-        for(int i : hdr){
+        if(hdr.length == 0){
+            hdrCapabilities.append("N/A").append("\n").append("N/A");
+        }else {
+            for(int i : hdr){
 
-             if(i == 1) hdrCapabilities.append("Dolby Vision HDR");
-             if(i == 2) hdrCapabilities.append("HDR10");
-             if(i == 3) hdrCapabilities.append("HLG HDR");
-             if(i == 4) hdrCapabilities.append("HDR10+");
-            hdrCapabilities.append("\n");
+                if(i == 1) hdrCapabilities.append("Dolby Vision HDR");
+                if(i == 2) hdrCapabilities.append("HDR10");
+                if(i == 3) hdrCapabilities.append("HLG HDR");
+                if(i == 4) hdrCapabilities.append("HDR10+");
+                hdrCapabilities.append("\n");
+            }
         }
+
         return hdrCapabilities.toString().trim();
     }
     private String getLuminance(){
@@ -167,10 +173,10 @@ public class MainActivity extends AppCompatActivity {
         if(display.isWideColorGamut()){
             wideColorGamut.append("Supported").append("\n");
         }
-        else wideColorGamut.append("Not Supported").append("\n");
+        else wideColorGamut.append("N/A").append("\n");
         wideColorGamut.append("Device : ");
         if(config.isScreenWideColorGamut()) wideColorGamut.append("Supported");
-        else wideColorGamut.append("Not Supported");
+        else wideColorGamut.append("N/A");
 
         return wideColorGamut.toString();
     }
