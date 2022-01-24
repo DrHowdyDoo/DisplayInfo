@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/parentLayout"
     android:fitsSystemWindows="true"
+    tools:ignore="ContentDescription,hardcodedText"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -46,6 +47,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp">
 
@@ -194,7 +196,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/title_body_gap"
-                        app:srcCompat="@drawable/ic_ppi"
+                        app:srcCompat="@drawable/ic_refresh_rate"
                         app:tint="?colorPrimary" />
 
                     <TextView
@@ -203,17 +205,18 @@
                         android:layout_height="wrap_content"
                         android:breakStrategy="balanced"
                         android:gravity="center"
-                        android:text="@string/pixels_per_inch"
+                        android:text="@string/refresh_rate"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/textView_ppi"
+                        android:id="@+id/textView_refresh_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:breakStrategy="balanced"
-                        android:text="395"
+                        android:gravity="center"
+                        android:text="N/A"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                 </LinearLayout>
@@ -269,6 +272,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:text="411"
+                        android:gravity="center"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                 </LinearLayout>
@@ -317,6 +321,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/title_body_gap"
+                        android:gravity="center"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:text="TextView"
                         />
@@ -368,6 +373,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/title_body_gap"
+                        android:gravity="center"
                         android:text="N/A"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
@@ -399,7 +405,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_refresh_rate"
+                        app:srcCompat="@drawable/ic_ppi"
                         app:tint="?colorPrimary"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
@@ -407,12 +413,12 @@
                         android:id="@+id/textView20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/refresh_rate"
+                        android:text="@string/pixels_per_inch"
                         android:textColor="?colorPrimary"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                     <TextView
-                        android:id="@+id/textView_refresh_rate"
+                        android:id="@+id/textView_ppi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -470,6 +476,51 @@
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:text="N/A"
                         />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView_refresh_rate"
+                style="?attr/materialCardViewOutlinedStyle">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_display_modes"
+                        app:tint="?colorPrimary"
+                        android:layout_marginBottom="@dimen/title_body_gap"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textColor="?colorPrimary"
+                        android:text="@string/supported_display_modes"/>
+
+                    <TextView
+                        android:id="@+id/textView_modes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="N/A"
+                        android:layout_marginTop="@dimen/title_body_gap"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"/>
 
                 </LinearLayout>
 

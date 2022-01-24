@@ -11,4 +11,5 @@
     <string name="wide_color_gamut">Wide Color Gamut</string>
     <string name="manufacture_year">Manufacture Year</string>
     <string name="manufacture_week">Manufacture week</string>
+    <string name="supported_display_modes">Supported Display Modes</string>
 </resources>

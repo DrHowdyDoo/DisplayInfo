@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 
 import com.drhowdydoo.displayinfo.databinding.ActivityMainBinding;
+import com.google.android.material.color.DynamicColors;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = mainBinding.getRoot();
+        if(DynamicColors.isDynamicColorAvailable()) DynamicColors.applyIfAvailable(this);
         setContentView(view);
 
         dm = getResources().getDisplayMetrics();
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.textViewLuminance.setText(getLuminance());
         mainBinding.textViewRefreshRate.setText(getRefreshRate());
         mainBinding.textViewWcg.setText(getColorGamut());
+        mainBinding.textViewModes.setText(getDisplayModes());
 
 
 
@@ -83,12 +86,14 @@ public class MainActivity extends AppCompatActivity {
         if (q == 0) return p;
         else return gcd(q, p % q);
     }
-    private String ratio(int a, int b) {
-        final int gcd = gcd(a,b);
+    private String ratio(float a, float b) {
+        //final int gcd = gcd(a,b);
+        DecimalFormat format = new DecimalFormat("#");
+        final float gcd = 120;
         if(a > b) {
-            return a/gcd + " : " + b/gcd;
+            return a/gcd + " : " + format.format(b/gcd);
         } else {
-            return b/gcd + " : " + a/gcd;
+            return b/gcd + " : " + format.format(a/gcd);
         }
     }
 
@@ -128,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         return "ldpi";
     }
     private String getPpi(){
-        return "x : " +(int)dm.xdpi + "   " + "y : " +(int)dm.ydpi ;
+        return "X : " +(int)dm.xdpi + " ppi" + "\n" + "Y : " +(int)dm.ydpi + " ppi";
     }
     private String getHdrCapabilities(){
         int[] hdr = display.getHdrCapabilities().getSupportedHdrTypes();
@@ -151,15 +156,10 @@ public class MainActivity extends AppCompatActivity {
         return "Min : " +(int)min + " nits" + "\n" + "Max : " +(int)max + " nits";
     }
     private String getRefreshRate(){
-        StringBuilder frameRates = new StringBuilder();
+
         int currRefreshRate = (int) display.getMode().getRefreshRate();
-        frameRates.append(currRefreshRate).append(" Hz");
-        Display.Mode[] modes = display.getSupportedModes();
-        for(Display.Mode mode : modes){
-            frameRates.append("\n");
-            frameRates.append((int) mode.getRefreshRate()).append(" Hz");
-        }
-        return frameRates.toString().trim();
+
+        return currRefreshRate + " Hz";
     }
     private String getColorGamut(){
         StringBuilder wideColorGamut = new StringBuilder();
@@ -173,6 +173,15 @@ public class MainActivity extends AppCompatActivity {
         else wideColorGamut.append("Not Supported");
 
         return wideColorGamut.toString();
+    }
+    private String getDisplayModes(){
+        Display.Mode[] modes = display.getSupportedModes();
+        StringBuilder displayModes = new StringBuilder();
+        for(Display.Mode mode : modes){
+             displayModes.append(mode.getPhysicalHeight()).append(" x ").append(mode.getPhysicalWidth())
+                     .append(" @ ").append((int) mode.getRefreshRate()).append(" Hz").append("\n");
+        }
+        return displayModes.toString().trim();
     }
 
 
