@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Display Info</string>
+    <string name="resolution">Resolution</string>
+    <string name="aspect_ratio">Aspect Ratio</string>
+    <string name="density">Density</string>
+    <string name="dpi">DPI</string>
+    <string name="pixels_per_inch">Pixels per Inch</string>
+    <string name="smallest_screen_width_dp">Smallest Width</string>
+    <string name="luminance">Luminance</string>
+    <string name="refresh_rate">Refresh rate</string>
+    <string name="wide_color_gamut">Wide Color Gamut</string>
+    <string name="manufacture_year">Manufacture Year</string>
+    <string name="manufacture_week">Manufacture week</string>
+</resources>
