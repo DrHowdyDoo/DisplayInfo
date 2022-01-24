@@ -23,15 +23,15 @@
         <item name="colorErrorContainer">@color/purple_error_30</item>
         <item name="colorOnErrorContainer">@color/purple_error_80</item>
 
-        <item name="android:colorBackground">@color/black</item>
+        <item name="android:colorBackground">@color/purple_neutral_10</item>
         <item name="colorOnBackground">@color/purple_neutral_90</item>
 
-        <item name="colorSurface">@color/black</item>
+        <item name="colorSurface">@color/purple_neutral_10</item>
         <item name="colorOnSurface">@color/purple_neutral_90</item>
         <item name="colorSurfaceInverse">@color/purple_neutral_90</item>
         <item name="colorOnSurfaceInverse">@color/purple_neutral_20</item>
 
-        <item name="colorSurfaceVariant">@color/purple_neutral_10</item>
+        <item name="colorSurfaceVariant">@color/purple_neutral_variant_30</item>
         <item name="colorOnSurfaceVariant">@color/purple_neutral_variant_80</item>
 
         <item name="colorOutline">@color/purple_neutral_variant_60</item>
