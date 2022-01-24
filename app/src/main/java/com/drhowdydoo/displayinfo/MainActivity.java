@@ -59,7 +59,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getResolution(){
-        return display.getMode().getPhysicalHeight() + " x " + display.getMode().getPhysicalWidth();
+        StringBuilder resolution = new StringBuilder();
+        int height = display.getMode().getPhysicalHeight();
+        int width = display.getMode().getPhysicalWidth();
+        resolution.append(height).append(" x ").append(width);
+        if(width == 720) resolution.append(" (HD)");
+        if(width == 1080) {
+            if(height == 1920) resolution.append(" (FHD)");
+            if(height > 1920) resolution.append(" (FHD+)");
+        }
+        if(width == 1440){
+            if(height == 2560) resolution.append(" (QHD)");
+            if(height > 2560) resolution.append(" (QHD+)");
+        }
+        if(width == 2160) resolution.append(" (UHD)");
+        if(width == 4320) resolution.append(" (8K)");
+        return resolution.toString();
     }
     private String getAspectRatio(){
         return ratio(display.getMode().getPhysicalHeight(),display.getMode().getPhysicalWidth());
