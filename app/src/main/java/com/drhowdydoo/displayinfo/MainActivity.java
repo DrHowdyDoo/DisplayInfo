@@ -76,25 +76,23 @@ public class MainActivity extends AppCompatActivity {
             if(height > 2560) resolution.append(" (QHD+)");
         }
         if(width == 2160) resolution.append(" (UHD)");
-        if(width == 4320) resolution.append(" (8K)");
+        if(width >= 4320) resolution.append(" (8K)");
         return resolution.toString();
     }
     private String getAspectRatio(){
         return ratio(display.getMode().getPhysicalHeight(),display.getMode().getPhysicalWidth());
     }
-    private int gcd(int p, int q) {
-        if (q == 0) return p;
-        else return gcd(q, p % q);
-    }
+
     private String ratio(float a, float b) {
-        //final int gcd = gcd(a,b);
-        DecimalFormat format = new DecimalFormat("#");
-        DecimalFormat format2 = new DecimalFormat("#.#");
-        final float gcd = 120;
+
+        DecimalFormat A = new DecimalFormat("#.#");
+        DecimalFormat B = new DecimalFormat("#");
+        final float gcd = (b/720) * 80;
+
         if(a > b) {
-            return format2.format(a/gcd) + " : " + format.format(b/gcd);
+            return A.format(a/gcd) + " : " + B.format(b/gcd);
         } else {
-            return format2.format(b/gcd) + " : " + format.format(a/gcd);
+            return A.format(b/gcd) + " : " + B.format(a/gcd);
         }
     }
 
