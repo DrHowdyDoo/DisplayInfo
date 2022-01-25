@@ -53,7 +53,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
-                style="?attr/materialCardViewOutlinedStyle"
+                style="?attr/materialCardViewElevatedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="32dp"
@@ -71,7 +71,6 @@
                         android:id="@+id/ic_screen"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:backgroundTint="?colorPrimary"
                         android:background="@drawable/ic_screen"
                         app:layout_constraintDimensionRatio="H,2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +175,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView_refresh_rate"
-                style="?attr/materialCardViewOutlinedStyle"
+                style="?attr/materialCardViewElevatedStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/titles_gap"
@@ -236,7 +235,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView3"
-                style="?attr/materialCardViewOutlinedStyle"
+                style="?attr/materialCardViewElevatedStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -313,7 +312,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView_hdr"
-                style="?attr/materialCardViewOutlinedStyle"
+                style="?attr/materialCardViewElevatedStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -364,7 +363,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView_ppi"
-                style="?attr/materialCardViewOutlinedStyle"
+                style="?attr/materialCardViewElevatedStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -414,7 +413,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView_wide_color"
-                style="?attr/materialCardViewOutlinedStyle"
+                style="?attr/materialCardViewElevatedStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -471,7 +470,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView_ppi"
-                style="?attr/materialCardViewOutlinedStyle">
+                style="?attr/materialCardViewElevatedStyle">
 
                 <LinearLayout
                     android:layout_width="match_parent"

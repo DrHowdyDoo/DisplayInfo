@@ -67,15 +67,15 @@ public class MainActivity extends AppCompatActivity {
         int width = display.getMode().getPhysicalWidth();
         resolution.append(height).append(" x ").append(width);
         if(width == 720) resolution.append(" (HD)");
-        if(width == 1080) {
+        if(width >= 1080 && width < 1440) {
             if(height == 1920) resolution.append(" (FHD)");
             if(height > 1920) resolution.append(" (FHD+)");
         }
-        if(width == 1440){
+        if(width >= 1440 && width < 2160){
             if(height == 2560) resolution.append(" (QHD)");
             if(height > 2560) resolution.append(" (QHD+)");
         }
-        if(width == 2160) resolution.append(" (UHD)");
+        if(width >= 2160 && width < 4320) resolution.append(" (UHD)");
         if(width >= 4320) resolution.append(" (8K)");
         return resolution.toString();
     }
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private String ratio(float a, float b) {
 
         DecimalFormat A = new DecimalFormat("#.#");
-        DecimalFormat B = new DecimalFormat("#");
+        DecimalFormat B = new DecimalFormat("#.#");
         final float gcd = (b/720) * 80;
 
         if(a > b) {
