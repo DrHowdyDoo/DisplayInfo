@@ -55,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.textViewRefreshRate.setText(getRefreshRate());
         mainBinding.textViewWcg.setText(getColorGamut());
         mainBinding.textViewModes.setText(getDisplayModes());
-
-
+        mainBinding.textViewModel.setText(getModel());
 
 
     }
@@ -186,6 +185,10 @@ public class MainActivity extends AppCompatActivity {
                      .append(" @ ").append((int) mode.getRefreshRate()).append(" Hz").append("\n");
         }
         return displayModes.toString().trim();
+    }
+    private String getModel(){
+
+        return Build.BRAND + " " + Build.DEVICE;
     }
 
 

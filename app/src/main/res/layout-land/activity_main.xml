@@ -64,8 +64,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp">
 
                     <ImageView
                         android:id="@+id/ic_screen"
@@ -77,6 +77,7 @@
                         app:layout_constraintHorizontal_bias="0.9"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintWidth_percent="0.48"
                         android:backgroundTint="?colorPrimary" />
 
@@ -91,72 +92,87 @@
                         app:layout_constraintStart_toStartOf="@+id/ic_screen"
                         app:layout_constraintTop_toTopOf="@+id/ic_screen" />
 
-                    <ImageView
-                        android:id="@+id/ic_resolution"
+                    <LinearLayout
+                        android:id="@+id/main_linear_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/title_body_gap"
-                        app:tint="?colorPrimary"
-                        app:layout_constraintBottom_toTopOf="@+id/txtView_resolution"
-                        app:layout_constraintEnd_toStartOf="@+id/ic_screen"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:srcCompat="@drawable/ic_resolution" />
-
-                    <TextView
-                        android:id="@+id/txtView_resolution"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/titles_gap"
-                        android:text="1920 x 1080"
-                        android:textAppearance="?attr/textAppearanceTitleMedium"
-                        app:layout_constraintBottom_toTopOf="@+id/ic_aspect_ration"
-                        app:layout_constraintEnd_toEndOf="@+id/ic_resolution"
-                        app:layout_constraintStart_toStartOf="@+id/ic_resolution" />
-
-                    <ImageView
-                        android:id="@+id/ic_aspect_ration"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="24dp"
-                        app:tint="?colorPrimary"
+                        app:layout_constrainedWidth="true"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="@+id/ic_screen"
                         app:layout_constraintEnd_toStartOf="@+id/ic_screen"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/ic_screen"
-                        app:srcCompat="@drawable/ic_aspect_ratio" />
+                        app:layout_constraintTop_toTopOf="@+id/ic_screen">
 
-                    <TextView
-                        android:id="@+id/textView_aspect_ratio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/title_body_gap"
-                        android:text="19:21"
-                        android:textAppearance="?attr/textAppearanceTitleMedium"
-                        app:layout_constraintEnd_toEndOf="@+id/ic_aspect_ration"
-                        app:layout_constraintStart_toStartOf="@+id/ic_aspect_ration"
-                        app:layout_constraintTop_toBottomOf="@+id/ic_aspect_ration" />
 
-                    <ImageView
-                        android:id="@+id/ic_density"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/titles_gap"
-                        app:tint="?colorPrimary"
-                        app:layout_constraintEnd_toStartOf="@+id/ic_screen"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView_aspect_ratio"
-                        app:srcCompat="@drawable/ic_dpi" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/title_body_gap"
+                            app:srcCompat="@drawable/ic_round_smartphone_24"
+                            app:tint="?colorPrimary" />
 
-                    <TextView
-                        android:id="@+id/textView_density"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/title_body_gap"
-                        android:text="xxhdpi"
-                        android:textAppearance="?attr/textAppearanceTitleMedium"
-                        app:layout_constraintEnd_toEndOf="@+id/ic_density"
-                        app:layout_constraintStart_toStartOf="@+id/ic_density"
-                        app:layout_constraintTop_toBottomOf="@+id/ic_density" />
+                        <TextView
+                            android:id="@+id/textView_model"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/titles_gap"
+                            android:text="Realme X"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                        <ImageView
+                            android:id="@+id/ic_resolution"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/title_body_gap"
+                            app:srcCompat="@drawable/ic_resolution"
+                            app:tint="?colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/txtView_resolution"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/titles_gap"
+                            android:text="1920 x 1080"
+                            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                        <ImageView
+                            android:id="@+id/ic_aspect_ration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_aspect_ratio"
+                            app:tint="?colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/textView_aspect_ratio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/title_body_gap"
+                            android:text="19:21"
+                            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                        <ImageView
+                            android:id="@+id/ic_density"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/titles_gap"
+                            app:srcCompat="@drawable/ic_dpi"
+                            app:tint="?colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/textView_density"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/title_body_gap"
+                            android:text="xxhdpi"
+                            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+
+                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/ic_hrd"

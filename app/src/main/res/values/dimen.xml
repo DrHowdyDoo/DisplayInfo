@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="title_body_gap">6dp</dimen>
-    <dimen name="titles_gap">16dp</dimen>
+    <dimen name="titles_gap">18dp</dimen>
     <dimen name="drawable_padding">6dp</dimen>
 </resources>
