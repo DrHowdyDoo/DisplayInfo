@@ -53,7 +53,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
-                style="?attr/materialCardViewElevatedStyle"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="32dp"
@@ -111,7 +111,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/title_body_gap"
                             app:srcCompat="@drawable/ic_round_smartphone_24"
-                            app:tint="?colorPrimary" />
+                            app:tint="?colorPrimary"
+                            />
 
                         <TextView
                             android:id="@+id/textView_model"
@@ -119,6 +120,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/titles_gap"
                             android:text="Realme X"
+                            android:breakStrategy="balanced"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:textAppearance="?attr/textAppearanceTitleMedium" />
@@ -128,8 +130,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/title_body_gap"
-                            app:srcCompat="@drawable/ic_resolution"
-                            app:tint="?colorPrimary" />
+                            app:tint="?colorPrimary"
+                            app:srcCompat="@drawable/ic_resolution" />
 
                         <TextView
                             android:id="@+id/txtView_resolution"
@@ -144,8 +146,9 @@
                             android:id="@+id/ic_aspect_ration"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:tint="?colorPrimary"
                             app:srcCompat="@drawable/ic_aspect_ratio"
-                            app:tint="?colorPrimary" />
+                            />
 
                         <TextView
                             android:id="@+id/textView_aspect_ratio"
@@ -161,8 +164,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/titles_gap"
+                            app:tint="?colorPrimary"
                             app:srcCompat="@drawable/ic_dpi"
-                            app:tint="?colorPrimary" />
+                            />
 
                         <TextView
                             android:id="@+id/textView_density"
@@ -195,7 +199,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView_refresh_rate"
-                style="?attr/materialCardViewElevatedStyle"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/titles_gap"
@@ -219,7 +223,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/title_body_gap"
                         app:srcCompat="@drawable/ic_refresh_rate"
-                        app:tint="?colorPrimary" />
+                        app:tint="?colorOnBackground" />
 
                     <TextView
                         android:id="@+id/textView12"
@@ -228,8 +232,7 @@
                         android:breakStrategy="balanced"
                         android:gravity="center"
                         android:text="@string/refresh_rate"
-                        android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="?attr/colorPrimary" />
+                        android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                     <TextView
                         android:id="@+id/textView_refresh_rate"
@@ -237,6 +240,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:breakStrategy="balanced"
+                        android:alpha="0.8"
                         android:gravity="center"
                         android:text="N/A"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
@@ -255,7 +259,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView3"
-                style="?attr/materialCardViewElevatedStyle"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -278,7 +282,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/title_body_gap"
                         app:srcCompat="@drawable/ic_smallest_width_dp"
-                        app:tint="?colorPrimary" />
+                        app:tint="?colorOnBackground" />
 
                     <TextView
                         android:id="@+id/textView14"
@@ -286,7 +290,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/smallest_screen_width_dp"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="?attr/colorPrimary" />
+                        />
 
                     <TextView
                         android:id="@+id/textView_sswdp"
@@ -295,6 +299,7 @@
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:layout_marginBottom="16dp"
                         android:text="411"
+                        android:alpha="0.8"
                         android:gravity="center"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
@@ -303,7 +308,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_luminance"
-                        app:tint="?colorPrimary"
+                        app:tint="?colorOnBackground"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
@@ -311,7 +316,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/luminance"
-                        android:textColor="?colorPrimary"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         />
 
@@ -321,6 +325,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:gravity="center"
+                        android:alpha="0.8"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:text="TextView"
                         />
@@ -332,7 +337,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView_hdr"
-                style="?attr/materialCardViewElevatedStyle"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -355,7 +360,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_hdr"
-                        app:tint="?colorPrimary"
+                        app:tint="?colorOnBackground"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
@@ -363,7 +368,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textColor="?attr/colorPrimary"
                         android:text="HDR capabilities"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
@@ -375,6 +379,7 @@
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:gravity="center"
                         android:text="N/A"
+                        android:alpha="0.8"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                 </LinearLayout>
@@ -383,7 +388,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView_ppi"
-                style="?attr/materialCardViewElevatedStyle"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -406,7 +411,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_ppi"
-                        app:tint="?colorPrimary"
+                        app:tint="?colorOnBackground"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
@@ -414,7 +419,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pixels_per_inch"
-                        android:textColor="?colorPrimary"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                     <TextView
@@ -423,6 +427,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_marginTop="@dimen/title_body_gap"
+                        android:alpha="0.8"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:text="N/A" />
 
@@ -433,7 +438,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView_wide_color"
-                style="?attr/materialCardViewElevatedStyle"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -456,7 +461,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_wide_color_gamut"
-                        app:tint="?colorPrimary"
+                        app:tint="?colorOnBackground"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
@@ -465,7 +470,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/wide_color_gamut"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="?colorPrimary"
                         />
 
                     <TextView
@@ -474,6 +478,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_marginTop="@dimen/title_body_gap"
+                        android:alpha="0.8"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:text="N/A"
                         />
@@ -490,7 +495,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView_ppi"
-                style="?attr/materialCardViewElevatedStyle">
+                style="?attr/materialCardViewFilledStyle">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -504,14 +509,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_display_modes"
-                        app:tint="?colorPrimary"
+                        app:tint="?colorOnBackground"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="?colorPrimary"
                         android:text="@string/supported_display_modes"/>
 
                     <TextView
@@ -520,6 +524,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="N/A"
+                        android:alpha="0.8"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:textAppearance="?attr/textAppearanceTitleMedium"/>
 
