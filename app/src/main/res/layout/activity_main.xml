@@ -223,7 +223,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/title_body_gap"
                         app:srcCompat="@drawable/ic_refresh_rate"
-                        app:tint="?colorOnBackground" />
+                        app:tint="?colorPrimary" />
 
                     <TextView
                         android:id="@+id/textView12"
@@ -240,7 +240,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:breakStrategy="balanced"
-                        android:alpha="0.8"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:text="N/A"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
@@ -282,7 +282,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/title_body_gap"
                         app:srcCompat="@drawable/ic_smallest_width_dp"
-                        app:tint="?colorOnBackground" />
+                        app:tint="?colorPrimary" />
 
                     <TextView
                         android:id="@+id/textView14"
@@ -299,7 +299,7 @@
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:layout_marginBottom="16dp"
                         android:text="411"
-                        android:alpha="0.8"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
@@ -308,7 +308,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_luminance"
-                        app:tint="?colorOnBackground"
+                        app:tint="?colorPrimary"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
@@ -325,7 +325,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:gravity="center"
-                        android:alpha="0.8"
+                        android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:text="TextView"
                         />
@@ -360,7 +360,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_hdr"
-                        app:tint="?colorOnBackground"
+                        app:tint="?colorPrimary"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
@@ -379,7 +379,7 @@
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:gravity="center"
                         android:text="N/A"
-                        android:alpha="0.8"
+                        android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                 </LinearLayout>
@@ -411,7 +411,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_ppi"
-                        app:tint="?colorOnBackground"
+                        app:tint="?colorPrimary"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
@@ -427,7 +427,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_marginTop="@dimen/title_body_gap"
-                        android:alpha="0.8"
+                        android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:text="N/A" />
 
@@ -461,7 +461,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_wide_color_gamut"
-                        app:tint="?colorOnBackground"
+                        app:tint="?colorPrimary"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
@@ -478,7 +478,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_marginTop="@dimen/title_body_gap"
-                        android:alpha="0.8"
+                        android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:text="N/A"
                         />
@@ -509,7 +509,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_display_modes"
-                        app:tint="?colorOnBackground"
+                        app:tint="?colorPrimary"
                         android:layout_marginBottom="@dimen/title_body_gap"/>
 
                     <TextView
@@ -524,7 +524,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="N/A"
-                        android:alpha="0.8"
+                        android:textStyle="bold"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:textAppearance="?attr/textAppearanceTitleMedium"/>
 
