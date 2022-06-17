@@ -12,4 +12,4 @@ This app only shows your device's display information and doesn't collect any ki
 Yours sincerely,  
 DrHowdyDoo.  
 Rajasthan, India.  
-avi.saxena99@gmail.com
+drhowdydoo@gmail.com
