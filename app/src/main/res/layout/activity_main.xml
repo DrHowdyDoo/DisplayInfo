@@ -20,6 +20,7 @@
             android:id="@+id/collapsingToolBar"
             style="?attr/collapsingToolbarLayoutMediumStyle"
             android:layout_width="match_parent"
+            app:maxLines="2"
             android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
             app:expandedTitleTextAppearance="?attr/textAppearanceDisplayMedium"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
@@ -140,6 +141,7 @@
                             android:layout_marginBottom="@dimen/titles_gap"
                             android:text="1920 x 1080"
                             android:textStyle="bold"
+                            android:gravity="center"
                             android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                         <ImageView
@@ -175,6 +177,7 @@
                             android:layout_marginTop="@dimen/title_body_gap"
                             android:text="xxhdpi"
                             android:textStyle="bold"
+                            android:gravity="center"
                             android:textAppearance="?attr/textAppearanceTitleMedium" />
 
 
@@ -288,6 +291,7 @@
                         android:id="@+id/textView14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/smallest_screen_width_dp"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         />
@@ -339,10 +343,11 @@
                 android:id="@+id/materialCardView_hdr"
                 style="?attr/materialCardViewFilledStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
                 app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialCardView3"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView_refresh_rate">
@@ -353,6 +358,7 @@
                     android:layout_margin="4dp"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
+                    android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -419,6 +425,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pixels_per_inch"
+                        android:gravity="center"
                         android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                     <TextView
@@ -469,6 +476,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wide_color_gamut"
+                        android:gravity="center"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         />
 
@@ -494,7 +502,7 @@
                 app:cardCornerRadius="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView_ppi"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView_wide_color"
                 style="?attr/materialCardViewFilledStyle">
 
                 <LinearLayout

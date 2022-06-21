@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(DynamicColors.isDynamicColorAvailable()) DynamicColors.applyToActivityIfAvailable(this);
         super.onCreate(savedInstanceState);
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = mainBinding.getRoot();
-        if(DynamicColors.isDynamicColorAvailable()) DynamicColors.applyIfAvailable(this);
         setContentView(view);
 
         dm = getResources().getDisplayMetrics();
