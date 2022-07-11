@@ -43,7 +43,7 @@
         <item name="android:windowBackground">@drawable/launcher_background</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:statusBarColor" >@android:color/transparent</item>
-
+        <item name="colorPrimary">@color/orange_primary</item>
     </style>
 
 </resources>
