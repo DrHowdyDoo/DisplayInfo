@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/materialCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/ic_screen"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_screen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H,2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.32" />
+
+        <TextView
+            android:id="@+id/txtView_screenSizeInInch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_screen"
+            app:layout_constraintEnd_toEndOf="@+id/ic_screen"
+            app:layout_constraintStart_toStartOf="@+id/ic_screen"
+            app:layout_constraintTop_toTopOf="@+id/ic_screen" />
+
+        <LinearLayout
+            android:id="@+id/main_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_screen"
+            app:layout_constraintEnd_toStartOf="@+id/ic_screen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ic_screen">
+
+
+            <ImageView
+                android:id="@+id/ic_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/title_body_gap"
+                app:srcCompat="@drawable/ic_round_smartphone_24"
+                app:tint="?colorPrimary" />
+
+            <TextView
+                android:id="@+id/txt_title_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:breakStrategy="balanced"
+                android:gravity="center"
+                android:text="Realme X"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_value_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/title_body_gap"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Body" />
+
+            <ImageView
+                android:id="@+id/ic_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/title_body_gap"
+                android:layout_marginTop="18dp"
+                app:srcCompat="@drawable/ic_resolution"
+                app:tint="?colorPrimary" />
+
+            <TextView
+                android:id="@+id/txt_title_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1920 x 1080"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_value_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/title_body_gap"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Body" />
+
+            <ImageView
+                android:id="@+id/ic_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                app:srcCompat="@drawable/ic_aspect_ratio"
+                app:tint="?colorPrimary" />
+
+            <TextView
+                android:id="@+id/txt_title_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/title_body_gap"
+                android:text="19:21"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:id="@+id/ic_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/titles_gap"
+                app:srcCompat="@drawable/ic_dpi"
+                app:tint="?colorPrimary" />
+
+            <TextView
+                android:id="@+id/txt_title_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/title_body_gap"
+                android:gravity="center"
+                android:text="xxhdpi"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/ic_hrd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="3dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/ic_screen"
+            app:layout_constraintTop_toTopOf="@+id/ic_screen"
+            app:srcCompat="@drawable/ic_hdr" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
