@@ -3,19 +3,17 @@ package com.drhowdydoo.displayinfo;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.customview.widget.ViewDragHelper;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,10 +22,16 @@ import com.drhowdydoo.displayinfo.databinding.ActivityMainBinding;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.color.DynamicColors;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,12 +40,16 @@ public class MainActivity extends AppCompatActivity {
     private Display display;
     private DisplayMetrics dm;
     private Configuration config;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (DynamicColors.isDynamicColorAvailable()) DynamicColors.applyToActivityIfAvailable(this);
         super.onCreate(savedInstanceState);
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = mainBinding.getRoot();
         setContentView(view);
@@ -68,29 +76,73 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Data> list = new ArrayList<>();
         Data d1 = new Data(R.drawable.ic_round_smartphone_24, R.drawable.ic_resolution,
-                R.drawable.ic_aspect_ratio, R.drawable.ic_dpi, R.drawable.ic_screen, getModel(), getResolution(), getAspectRatio(), getDensity(), "", "", getScreenSizeInInch());
-        Data d2 = new Data(R.drawable.ic_refresh_rate, 0, 0, 0, 0, "Refresh rate", "", "", "", getRefreshRate(), "", "");
-        Data d3 = new Data(R.drawable.ic_smallest_width_dp, R.drawable.ic_luminance, 0, 0, 0, "Smallest Width", "Luminance", "", "", config.smallestScreenWidthDp + " dp", getLuminance(), "");
-        Data d4 = new Data(R.drawable.ic_hdr, 0, 0, 0, 0, "HDR capabilities", "", "", "", getHdrCapabilities(), "", "");
-        Data d5 = new Data(R.drawable.ic_ppi, 0, 0, 0, 0, "Pixels per Inch", "", "", "", getPpi(), "", "");
-        Data d6 = new Data(R.drawable.ic_wide_color_gamut, 0, 0, 0, 0, "Wide Color Gamut", "", "", "", getColorGamut(), "", "");
-        Data d7 = new Data(R.drawable.ic_display_modes, 0, 0, 0, 0, "Supported Display Modes", "", "", "", getDisplayModes(), "", "");
+                R.drawable.ic_aspect_ratio, R.drawable.ic_dpi, R.drawable.ic_screen, getModel(), getResolution(), getAspectRatio(), getDensity(), "", "", getScreenSizeInInch(), 0);
+        Data d2 = new Data(R.drawable.ic_refresh_rate, 0, 0, 0, 0, "Refresh rate", "", "", "", getRefreshRate(), "", "", 1);
+        Data d3 = new Data(R.drawable.ic_smallest_width_dp, R.drawable.ic_luminance, 0, 0, 0, "Smallest Width", "Luminance", "", "", config.smallestScreenWidthDp + " dp", getLuminance(), "", 2);
+        Data d4 = new Data(R.drawable.ic_hdr, 0, 0, 0, 0, "HDR capabilities", "", "", "", getHdrCapabilities(), "", "", 3);
+        Data d5 = new Data(R.drawable.ic_ppi, 0, 0, 0, 0, "Pixels per Inch", "", "", "", getPpi(), "", "", 4);
+        Data d6 = new Data(R.drawable.ic_wide_color_gamut, 0, 0, 0, 0, "Wide Color Gamut", "", "", "", getColorGamut(), "", "", 5);
+        Data d7 = new Data(R.drawable.ic_display_modes, 0, 0, 0, 0, "Supported Display Modes", "", "", "", getDisplayModes(), "", "", 6);
 
-        list.add(d1);
-        list.add(d2);
-        list.add(d3);
-        list.add(d4);
-        list.add(d5);
-        list.add(d6);
-        list.add(d7);
+        HashMap<Integer,Data> map = new HashMap<>();
+        map.put(0,d1);
+        map.put(1,d2);
+        map.put(2,d3);
+        map.put(3,d4);
+        map.put(4,d5);
+        map.put(5,d6);
+        map.put(6,d7);
+
+
+        if(!sharedPref.getString("itemList","").isEmpty()){
+            String itemList = sharedPref.getString("itemList","");
+            try {
+                JSONObject json = new JSONObject(new JSONTokener(itemList));
+                JSONArray jsonArr = json.getJSONArray("item_id_list");
+                for (int i = 0; i < jsonArr.length(); i++)
+                    list.add(map.get(jsonArr.getInt(i)));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            list.add(d1);
+            list.add(d2);
+            list.add(d3);
+            list.add(d4);
+            list.add(d5);
+            list.add(d6);
+            list.add(d7);
+        }
 
         RecyclerView recyclerView = mainBinding.recyclerView;
         Adapter adapter = new Adapter(list);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+       // GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        onListChangedListener listChangedListener = (dataArrayList) -> {
+            String idList;
+            try {
+                JSONArray jsonArray = new JSONArray();
+                for(Data data : dataArrayList){
+                    jsonArray.put(data.getId());
+                }
+                JSONObject json = new JSONObject();
+                json.put("item_id_list", jsonArray);
+                idList = json.toString();
+                editor.putString("itemList",idList).apply();
+
+            }catch ( org.json.JSONException e){
+                e.printStackTrace();
+                idList = "";
+            }
+
+
+        };
 
 //        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 //            @Override
@@ -112,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 Collections.swap(list, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                listChangedListener.onListChanged(list);
                 adapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
                 return true;
             }
