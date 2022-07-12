@@ -9,8 +9,8 @@ android {
         applicationId "com.drhowdydoo.displayinfo"
         minSdk 27
         targetSdk 31
-        versionCode 10
-        versionName "2.0"
+        versionCode 11
+        versionName "2.1-alpha01"
 
     }
 

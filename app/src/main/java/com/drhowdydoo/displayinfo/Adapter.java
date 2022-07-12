@@ -1,5 +1,7 @@
 package com.drhowdydoo.displayinfo;
 
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +35,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Data data = list.get(position);
-
-
 
         StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
         if(data.getIc_screen() != 0 || data.getTitle_1().equalsIgnoreCase("supported display modes")) layoutParams.setFullSpan(true);
@@ -101,6 +101,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
             screenSize = cardBinding.txtViewScreenSizeInInch;
         }
+
     }
 
 }
