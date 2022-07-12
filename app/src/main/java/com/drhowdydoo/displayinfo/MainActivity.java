@@ -1,6 +1,7 @@
 package com.drhowdydoo.displayinfo;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.customview.widget.ViewDragHelper;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -118,6 +119,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
+            }
+
+            @Override
+            public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
+                super.onSelectedChanged(viewHolder, actionState);
+                if(actionState == ItemTouchHelper.ACTION_STATE_DRAG){
+                    if(viewHolder != null && viewHolder.itemView instanceof MaterialCardView) ((MaterialCardView)viewHolder.itemView).setDragged(true);
+                }
+            }
+
+            @Override
+            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+                super.clearView(recyclerView, viewHolder);
+                if(viewHolder.itemView instanceof MaterialCardView) ((MaterialCardView)viewHolder.itemView).setDragged(false);
             }
         };
 
