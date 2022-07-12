@@ -1,7 +1,9 @@
 package com.drhowdydoo.displayinfo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -23,6 +25,7 @@ import com.google.android.material.color.DynamicColors;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,12 +67,12 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Data> list = new ArrayList<>();
         Data d1 = new Data(R.drawable.ic_round_smartphone_24, R.drawable.ic_resolution,
                 R.drawable.ic_aspect_ratio, R.drawable.ic_dpi, R.drawable.ic_screen, getModel(), getResolution(), getAspectRatio(), getDensity(), "", "");
-        Data d2 = new Data(R.drawable.ic_refresh_rate,0,0,0,0,"Refresh rate","","","",getRefreshRate(),"");
-        Data d3 = new Data(R.drawable.ic_smallest_width_dp,R.drawable.ic_luminance,0,0,0,"Smallest Width","Luminance","","",config.smallestScreenWidthDp + " dp",getLuminance());
-        Data d4 = new Data(R.drawable.ic_hdr,0,0,0,0,"HDR capabilities","","","",getHdrCapabilities(),"");
-        Data d5 = new Data(R.drawable.ic_ppi,0,0,0,0,"Pixels per Inch","","","",getPpi(),"");
-        Data d6 = new Data(R.drawable.ic_wide_color_gamut,0,0,0,0,"Wide Color Gamut","","","",getColorGamut(),"");
-        Data d7 = new Data(R.drawable.ic_display_modes,0,0,0,0,"Supported Display Modes","","","",getDisplayModes(),"");
+        Data d2 = new Data(R.drawable.ic_refresh_rate, 0, 0, 0, 0, "Refresh rate", "", "", "", getRefreshRate(), "");
+        Data d3 = new Data(R.drawable.ic_smallest_width_dp, R.drawable.ic_luminance, 0, 0, 0, "Smallest Width", "Luminance", "", "", config.smallestScreenWidthDp + " dp", getLuminance());
+        Data d4 = new Data(R.drawable.ic_hdr, 0, 0, 0, 0, "HDR capabilities", "", "", "", getHdrCapabilities(), "");
+        Data d5 = new Data(R.drawable.ic_ppi, 0, 0, 0, 0, "Pixels per Inch", "", "", "", getPpi(), "");
+        Data d6 = new Data(R.drawable.ic_wide_color_gamut, 0, 0, 0, 0, "Wide Color Gamut", "", "", "", getColorGamut(), "");
+        Data d7 = new Data(R.drawable.ic_display_modes, 0, 0, 0, 0, "Supported Display Modes", "", "", "", getDisplayModes(), "");
 
         list.add(d1);
         list.add(d2);
@@ -82,17 +85,40 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = mainBinding.recyclerView;
         Adapter adapter = new Adapter(list);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
 
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if(position == 0 || position == 6) return 2;
+                if (list.get(position).getIc_screen() != 0 || list.get(position).getTitle_1().equalsIgnoreCase("supported display modes")) return 2;
                 return 1;
             }
         });
+
+        ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+                return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
+                        ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+            }
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                Collections.swap(list, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                adapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                return true;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            }
+        };
+
+        ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
+        ith.attachToRecyclerView(recyclerView);
 
     }
 
