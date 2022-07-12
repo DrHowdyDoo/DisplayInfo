@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,11 +12,9 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.accessibility.AccessibilityManager;
 
 import com.drhowdydoo.displayinfo.databinding.ActivityMainBinding;
 import com.google.android.material.color.DynamicColors;
@@ -66,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Data> list = new ArrayList<>();
         Data d1 = new Data(R.drawable.ic_round_smartphone_24, R.drawable.ic_resolution,
-                R.drawable.ic_aspect_ratio, R.drawable.ic_dpi, R.drawable.ic_screen, getModel(), getResolution(), getAspectRatio(), getDensity(), "", "");
-        Data d2 = new Data(R.drawable.ic_refresh_rate, 0, 0, 0, 0, "Refresh rate", "", "", "", getRefreshRate(), "");
-        Data d3 = new Data(R.drawable.ic_smallest_width_dp, R.drawable.ic_luminance, 0, 0, 0, "Smallest Width", "Luminance", "", "", config.smallestScreenWidthDp + " dp", getLuminance());
-        Data d4 = new Data(R.drawable.ic_hdr, 0, 0, 0, 0, "HDR capabilities", "", "", "", getHdrCapabilities(), "");
-        Data d5 = new Data(R.drawable.ic_ppi, 0, 0, 0, 0, "Pixels per Inch", "", "", "", getPpi(), "");
-        Data d6 = new Data(R.drawable.ic_wide_color_gamut, 0, 0, 0, 0, "Wide Color Gamut", "", "", "", getColorGamut(), "");
-        Data d7 = new Data(R.drawable.ic_display_modes, 0, 0, 0, 0, "Supported Display Modes", "", "", "", getDisplayModes(), "");
+                R.drawable.ic_aspect_ratio, R.drawable.ic_dpi, R.drawable.ic_screen, getModel(), getResolution(), getAspectRatio(), getDensity(), "", "", getScreenSizeInInch());
+        Data d2 = new Data(R.drawable.ic_refresh_rate, 0, 0, 0, 0, "Refresh rate", "", "", "", getRefreshRate(), "", "");
+        Data d3 = new Data(R.drawable.ic_smallest_width_dp, R.drawable.ic_luminance, 0, 0, 0, "Smallest Width", "Luminance", "", "", config.smallestScreenWidthDp + " dp", getLuminance(), "");
+        Data d4 = new Data(R.drawable.ic_hdr, 0, 0, 0, 0, "HDR capabilities", "", "", "", getHdrCapabilities(), "", "");
+        Data d5 = new Data(R.drawable.ic_ppi, 0, 0, 0, 0, "Pixels per Inch", "", "", "", getPpi(), "", "");
+        Data d6 = new Data(R.drawable.ic_wide_color_gamut, 0, 0, 0, 0, "Wide Color Gamut", "", "", "", getColorGamut(), "", "");
+        Data d7 = new Data(R.drawable.ic_display_modes, 0, 0, 0, 0, "Supported Display Modes", "", "", "", getDisplayModes(), "", "");
 
         list.add(d1);
         list.add(d2);

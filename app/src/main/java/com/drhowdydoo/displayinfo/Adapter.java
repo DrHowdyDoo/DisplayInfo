@@ -33,6 +33,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Data data = list.get(position);
 
+        if(data.getScreenSize().isEmpty()) holder.screenSize.setVisibility(View.GONE);
+        else holder.screenSize.setText(data.getScreenSize());
+
         if(data.getIc_screen() == 0) holder.ic_screen.setVisibility(View.GONE);
         else holder.ic_screen.setImageResource(data.getIc_screen());
         if(data.getIc1() == 0) holder.ic1.setVisibility(View.GONE);
@@ -73,6 +76,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         public ImageView ic1,ic2,ic3,ic4,ic_screen;
         public TextView title1,title2,title3,title4;
         public TextView value1,value2;
+        public TextView screenSize;
 
         public ViewHolder(@NonNull ItemCardBinding cardBinding) {
             super(cardBinding.getRoot());
@@ -89,6 +93,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
             value1 = cardBinding.txtValue1;
             value2 = cardBinding.txtValue2;
+
+            screenSize = cardBinding.txtViewScreenSizeInInch;
         }
     }
 

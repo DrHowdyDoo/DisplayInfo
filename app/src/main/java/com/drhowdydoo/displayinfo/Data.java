@@ -5,8 +5,9 @@ public class Data {
     private int ic1,ic2,ic3,ic4,ic_screen;
     private String title_1,title_2,title_3,title_4;
     private String value_1,value_2;
+    private String screenSize;
 
-    public Data(int ic1, int ic2, int ic3, int ic4, int ic_screen, String title_1, String title_2, String title_3, String title_4, String value_1, String value_2) {
+    public Data(int ic1, int ic2, int ic3, int ic4, int ic_screen, String title_1, String title_2, String title_3, String title_4, String value_1, String value_2, String screenSize) {
         this.ic1 = ic1;
         this.ic2 = ic2;
         this.ic3 = ic3;
@@ -18,6 +19,15 @@ public class Data {
         this.title_4 = title_4;
         this.value_1 = value_1;
         this.value_2 = value_2;
+        this.screenSize = screenSize;
+    }
+
+    public String getScreenSize() {
+        return screenSize;
+    }
+
+    public void setScreenSize(String screenSize) {
+        this.screenSize = screenSize;
     }
 
     public String getValue_1() {
