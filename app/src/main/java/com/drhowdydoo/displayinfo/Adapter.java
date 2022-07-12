@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.drhowdydoo.displayinfo.databinding.ItemCardBinding;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Data data = list.get(position);
 
+
+
         StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
         if(data.getIc_screen() != 0 || data.getTitle_1().equalsIgnoreCase("supported display modes")) layoutParams.setFullSpan(true);
         
@@ -40,7 +43,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         else holder.screenSize.setText(data.getScreenSize());
 
         if(data.getIc_screen() == 0) holder.ic_screen.setVisibility(View.GONE);
-        else holder.ic_screen.setImageResource(data.getIc_screen());
         if(data.getIc1() == 0) holder.ic1.setVisibility(View.GONE);
         else holder.ic1.setImageResource(data.getIc1());
         if(data.getIc2() == 0) holder.ic2.setVisibility(View.GONE);

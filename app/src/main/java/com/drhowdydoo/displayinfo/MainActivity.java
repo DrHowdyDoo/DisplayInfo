@@ -2,6 +2,7 @@ package com.drhowdydoo.displayinfo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.customview.widget.ViewDragHelper;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.drhowdydoo.displayinfo.databinding.ActivityMainBinding;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.color.DynamicColors;
 
 import java.math.RoundingMode;
@@ -123,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         ith.attachToRecyclerView(recyclerView);
 
     }
+
+
 
     private String getResolution() {
         StringBuilder resolution = new StringBuilder();
