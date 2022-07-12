@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -83,16 +85,19 @@ public class MainActivity extends AppCompatActivity {
         Adapter adapter = new Adapter(list);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setAdapter(adapter);
 
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if (list.get(position).getIc_screen() != 0 || list.get(position).getTitle_1().equalsIgnoreCase("supported display modes")) return 2;
-                return 1;
-            }
-        });
+//        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//            @Override
+//            public int getSpanSize(int position) {
+//                Log.d(TAG, "getSpanSize: " + position + " " + list.get(position).getTitle_1());
+//                if (position == 0) return 2;
+//                if(position == 6) return 2;
+//                return 1;
+//            }
+//        });
 
         ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
             @Override

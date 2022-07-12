@@ -33,6 +33,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Data data = list.get(position);
 
+        StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
+        if(data.getIc_screen() != 0 || data.getTitle_1().equalsIgnoreCase("supported display modes")) layoutParams.setFullSpan(true);
+        
         if(data.getScreenSize().isEmpty()) holder.screenSize.setVisibility(View.GONE);
         else holder.screenSize.setText(data.getScreenSize());
 
