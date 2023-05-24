@@ -40,6 +40,7 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:paddingTop="32dp"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -49,6 +50,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
             android:orientation="vertical"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="8dp"
@@ -515,6 +517,85 @@
                         android:text="N/A"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:textAppearance="@style/TextAppearance.Body"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/touch_sampling_area"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/txt_swipe_guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="8dp"
+                    android:text="Swipe to check Touch Sampling Rate"
+                    app:drawableTopCompat="@drawable/round_swipe_24" />
+
+                <TextView
+                    android:id="@+id/txt_tsr_estimate"
+                    android:textColor="?colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Get an estimate"
+                    android:layout_gravity="center|bottom"
+                    />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/tsr_info_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
+                    android:gravity="start"
+                    android:layout_gravity="start"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Note"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        android:drawablePadding="8dp"
+                        app:drawableLeftCompat="@drawable/round_info_24" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/touch_sampling_rate_info"/>
+
+                    <Button
+                        android:id="@+id/btn_info_dismiss"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?attr/borderlessButtonStyle"
+                        android:text="Dismiss"/>
 
                 </LinearLayout>
 

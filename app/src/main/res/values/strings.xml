@@ -12,4 +12,7 @@
     <string name="manufacture_year">Manufacture Year</string>
     <string name="manufacture_week">Manufacture week</string>
     <string name="supported_display_modes">Supported Display Modes</string>
+
+    <string name="touch_sampling_rate_info">Touch Sampling Rate Checker\n\nPlease note that the touch sampling rate checker in this app provides an approximate estimation of the touch sampling rate on your device. However, it may not guarantee precise accuracy due to various factors.\n\nThe touch sampling rate can be influenced by factors such as the display\'s refresh rate and the speed at which you move your finger. Therefore, the calculated rate is an approximation and may vary in different scenarios.\n\nFor optimal results, consider enabling "Game Mode" if available, as it can potentially enhance the touch sampling rate in certain applications, such as games.\nKeep in mind that the actual touch sampling rate is determined by your device\'s hardware and firmware, and it is not possible to directly modify or access it programmatically.</string>
+
 </resources>

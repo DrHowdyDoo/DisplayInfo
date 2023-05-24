@@ -1,6 +1,7 @@
 package com.drhowdydoo.displayinfo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.splashscreen.SplashScreen;
 
 import android.annotation.SuppressLint;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
@@ -20,6 +22,8 @@ import com.google.android.material.color.DynamicColors;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +33,13 @@ public class MainActivity extends AppCompatActivity {
     private DisplayMetrics dm;
     private Configuration config;
 
-    @SuppressLint("SetTextI18n")
+    private long previousEventTime = 0;
+    private long touchSampleRate = 0;
+    private long actualTouchSampleRate = 0;
+
+    private HashMap<Long,Integer> touchSamples = new HashMap<>();
+
+    @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
@@ -58,6 +68,58 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.textViewWcg.setText(getColorGamut());
         mainBinding.textViewModes.setText(getDisplayModes());
         mainBinding.textViewModel.setText(getModel());
+
+        int refreshRate = (int) display.getMode().getRefreshRate();
+
+        mainBinding.touchSamplingArea.setOnTouchListener((v, event) -> {
+
+            if (event.getActionMasked() == MotionEvent.ACTION_MOVE) {
+                long eventTime = event.getEventTime();
+                int historySize = event.getHistorySize();
+                if (previousEventTime != 0 && (eventTime - previousEventTime) > 0) {
+                    touchSampleRate = 1000/(eventTime - previousEventTime);
+                    actualTouchSampleRate = touchSampleRate*historySize;
+                    System.out.println("TSR : " + touchSampleRate + " Hz");
+                    System.out.println("TSR Historical : " + actualTouchSampleRate + " Hz");
+                    mainBinding.txtSwipeGuide.setText("Touch Sampling Rate : " + actualTouchSampleRate + " Hz");
+
+                    if (actualTouchSampleRate >= refreshRate) {
+                        if (touchSamples.containsKey(actualTouchSampleRate)) {
+                            touchSamples.put(actualTouchSampleRate,touchSamples.get(actualTouchSampleRate) + 1);
+                        }
+                        else touchSamples.put(actualTouchSampleRate,1);
+                    }
+                }
+                previousEventTime = eventTime;
+            }
+
+            if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                mainBinding.txtTsrEstimate.setVisibility(View.VISIBLE);
+                mainBinding.txtSwipeGuide.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.round_touch_app_24,0,0);
+            }
+
+            if (event.getActionMasked() == MotionEvent.ACTION_UP) {
+                long maxKey = -1;
+                int maxValue = Integer.MIN_VALUE;
+                for (Map.Entry<Long, Integer> entry : touchSamples.entrySet()) {
+                    long key = entry.getKey();
+                    int value = entry.getValue();
+                    if (value > maxValue) {
+                        maxKey = key;
+                        maxValue = value;
+                    }
+                }
+                mainBinding.txtTsrEstimate.setText(maxKey + " Hz");
+            }
+
+            return true;
+        });
+
+
+        mainBinding.btnInfoDismiss.setOnClickListener(v -> {
+            mainBinding.tsrInfoCard.setVisibility(View.GONE);
+        });
+
 
 
     }
@@ -192,6 +254,5 @@ public class MainActivity extends AppCompatActivity {
 
         return Build.BRAND + " " + Build.DEVICE;
     }
-
 
 }
