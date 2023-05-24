@@ -3,6 +3,7 @@
 
     <style name="Widget.App.CardView" parent="Widget.Material3.CardView.Outlined">
         <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+        <item name="strokeWidth">2dp</item>
     </style>
 
     <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
@@ -15,6 +16,11 @@
     </style>
 
     <style name="TextAppearance.Body" parent="TextAppearance.Material3.BodyLarge">
+    </style>
+
+    <style name="Theme.App.Splash" parent="Theme.SplashScreen.IconBackground">
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.DisplayInfo</item>
     </style>
 
 </resources>

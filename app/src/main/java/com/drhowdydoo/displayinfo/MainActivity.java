@@ -1,6 +1,7 @@
 package com.drhowdydoo.displayinfo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -31,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(DynamicColors.isDynamicColorAvailable()) DynamicColors.applyToActivityIfAvailable(this);
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
+        DynamicColors.applyToActivityIfAvailable(this);
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = mainBinding.getRoot();
         setContentView(view);
