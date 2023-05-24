@@ -1,21 +1,19 @@
 package com.drhowdydoo.displayinfo;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.splashscreen.SplashScreen;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.accessibility.AccessibilityManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 
 import com.drhowdydoo.displayinfo.databinding.ActivityMainBinding;
 import com.google.android.material.color.DynamicColors;
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private long touchSampleRate = 0;
     private long actualTouchSampleRate = 0;
 
-    private HashMap<Long,Integer> touchSamples = new HashMap<>();
+    private HashMap<Long, Integer> touchSamples = new HashMap<>();
 
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     @Override
@@ -54,13 +52,16 @@ public class MainActivity extends AppCompatActivity {
         display = wm.getDefaultDisplay();
         config = getResources().getConfiguration();
 
+        SharedPreferences preferences = getSharedPreferences("com.drhowdydoo.displayinfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
         mainBinding.txtViewResolution.setText(getResolution());
         mainBinding.textViewAspectRatio.setText(getAspectRatio());
         mainBinding.txtViewScreenSizeInInch.setText(getScreenSizeInInch());
         mainBinding.textViewDensity.setText(getDensity());
         mainBinding.textViewPpi.setText(getPpi());
         mainBinding.textViewSswdp.setText(config.smallestScreenWidthDp + " dp");
-        if(display.isHdr()) mainBinding.icHrd.setVisibility(View.VISIBLE);
+        if (display.isHdr()) mainBinding.icHrd.setVisibility(View.VISIBLE);
 
         mainBinding.textViewHdr.setText(getHdrCapabilities());
         mainBinding.textViewLuminance.setText(getLuminance());
@@ -77,17 +78,14 @@ public class MainActivity extends AppCompatActivity {
                 long eventTime = event.getEventTime();
                 int historySize = event.getHistorySize();
                 if (previousEventTime != 0 && (eventTime - previousEventTime) > 0) {
-                    touchSampleRate = 1000/(eventTime - previousEventTime);
-                    actualTouchSampleRate = touchSampleRate*historySize;
-                    System.out.println("TSR : " + touchSampleRate + " Hz");
-                    System.out.println("TSR Historical : " + actualTouchSampleRate + " Hz");
+                    touchSampleRate = 1000 / (eventTime - previousEventTime);
+                    actualTouchSampleRate = touchSampleRate * historySize;
                     mainBinding.txtSwipeGuide.setText("Touch Sampling Rate : " + actualTouchSampleRate + " Hz");
 
                     if (actualTouchSampleRate >= refreshRate) {
                         if (touchSamples.containsKey(actualTouchSampleRate)) {
-                            touchSamples.put(actualTouchSampleRate,touchSamples.get(actualTouchSampleRate) + 1);
-                        }
-                        else touchSamples.put(actualTouchSampleRate,1);
+                            touchSamples.put(actualTouchSampleRate, touchSamples.get(actualTouchSampleRate) + 1);
+                        } else touchSamples.put(actualTouchSampleRate, 1);
                     }
                 }
                 previousEventTime = eventTime;
@@ -95,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
                 mainBinding.txtTsrEstimate.setVisibility(View.VISIBLE);
-                mainBinding.txtSwipeGuide.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.round_touch_app_24,0,0);
+                mainBinding.txtSwipeGuide.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.round_touch_app_24, 0, 0);
             }
 
             if (event.getActionMasked() == MotionEvent.ACTION_UP) {
@@ -115,66 +113,73 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        boolean showInfo = preferences.getBoolean("com.drhowdydoo.displayinfo.showInfo", true);
+        if (showInfo) {
+            mainBinding.tsrInfoCard.setVisibility(View.VISIBLE);
+        }
 
         mainBinding.btnInfoDismiss.setOnClickListener(v -> {
             mainBinding.tsrInfoCard.setVisibility(View.GONE);
+            editor.putBoolean("com.drhowdydoo.displayinfo.showInfo", false).apply();
         });
-
-
 
     }
 
-    private String getResolution(){
+
+    private String getResolution() {
         StringBuilder resolution = new StringBuilder();
         int height = display.getMode().getPhysicalHeight();
         int width = display.getMode().getPhysicalWidth();
         resolution.append(height).append(" x ").append(width);
-        if(width == 720) resolution.append(" (HD)");
-        if(width >= 1080 && width < 1440) {
-            if(height == 1920) resolution.append(" (FHD)");
-            if(height > 1920) resolution.append(" (FHD+)");
+        if (width == 720) resolution.append(" (HD)");
+        if (width >= 1080 && width < 1440) {
+            if (height == 1920) resolution.append(" (FHD)");
+            if (height > 1920) resolution.append(" (FHD+)");
         }
-        if(width >= 1440 && width < 2160){
-            if(height == 2560) resolution.append(" (QHD)");
-            if(height > 2560) resolution.append(" (QHD+)");
+        if (width >= 1440 && width < 2160) {
+            if (height == 2560) resolution.append(" (QHD)");
+            if (height > 2560) resolution.append(" (QHD+)");
         }
-        if(width >= 2160 && width < 4320) resolution.append(" (UHD)");
-        if(width >= 4320) resolution.append(" (8K)");
+        if (width >= 2160 && width < 4320) resolution.append(" (UHD)");
+        if (width >= 4320) resolution.append(" (8K)");
         return resolution.toString();
     }
-    private String getAspectRatio(){
-        return ratio(display.getMode().getPhysicalHeight(),display.getMode().getPhysicalWidth());
+
+    private String getAspectRatio() {
+        return ratio(display.getMode().getPhysicalHeight(), display.getMode().getPhysicalWidth());
     }
 
     private String ratio(float a, float b) {
 
         DecimalFormat A = new DecimalFormat("#.#");
         DecimalFormat B = new DecimalFormat("#.#");
-        final float gcd = (b/720) * 80;
+        final float gcd = (b / 720) * 80;
 
-        if(a > b) {
-            return A.format(a/gcd) + " : " + B.format(b/gcd);
+        if (a > b) {
+            return A.format(a / gcd) + " : " + B.format(b / gcd);
         } else {
-            return A.format(b/gcd) + " : " + B.format(a/gcd);
+            return A.format(b / gcd) + " : " + B.format(a / gcd);
         }
     }
 
 
-    private String getScreenSizeInInch(){
+    private String getScreenSizeInInch() {
 
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         double widthInch = display.getMode().getPhysicalWidth() / dm.xdpi;
         double heightInch = display.getMode().getPhysicalHeight() / dm.ydpi;
         double x = Math.pow(widthInch, 2);
         double y = Math.pow(heightInch, 2);
-        double screenInches = Math.sqrt(x + y) ;
+        double screenInches = Math.sqrt(x + y);
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
         return df.format(screenInches) + " in";
     }
-    private String getDensity(){
-        return dm.densityDpi + " dpi" + " (" + getDensityName() + ")" ;
+
+    private String getDensity() {
+        return dm.densityDpi + " dpi" + " (" + getDensityName() + ")";
     }
+
     private String getDensityName() {
         float density = dm.density;
         if (density >= 4.0) {
@@ -194,63 +199,69 @@ public class MainActivity extends AppCompatActivity {
         }
         return "ldpi";
     }
-    private String getPpi(){
-        return "X : " +(int)dm.xdpi + " ppi" + "\n" + "Y : " +(int)dm.ydpi + " ppi";
+
+    private String getPpi() {
+        return "X : " + (int) dm.xdpi + " ppi" + "\n" + "Y : " + (int) dm.ydpi + " ppi";
     }
-    private String getHdrCapabilities(){
+
+    private String getHdrCapabilities() {
         int[] hdr = display.getHdrCapabilities().getSupportedHdrTypes();
         StringBuilder hdrCapabilities = new StringBuilder();
 
-        if(hdr.length == 0){
+        if (hdr.length == 0) {
             hdrCapabilities.append("N/A").append("\n").append("N/A");
-        }else {
-            for(int i : hdr){
+        } else {
+            for (int i : hdr) {
 
-                if(i == 1) hdrCapabilities.append("Dolby Vision HDR");
-                if(i == 2) hdrCapabilities.append("HDR10");
-                if(i == 3) hdrCapabilities.append("HLG HDR");
-                if(i == 4) hdrCapabilities.append("HDR10+");
+                if (i == 1) hdrCapabilities.append("Dolby Vision HDR");
+                if (i == 2) hdrCapabilities.append("HDR10");
+                if (i == 3) hdrCapabilities.append("HLG HDR");
+                if (i == 4) hdrCapabilities.append("HDR10+");
                 hdrCapabilities.append("\n");
             }
         }
 
         return hdrCapabilities.toString().trim();
     }
-    private String getLuminance(){
+
+    private String getLuminance() {
         float min = display.getHdrCapabilities().getDesiredMinLuminance();
         float max = display.getHdrCapabilities().getDesiredMaxLuminance();
 
-        return "Min : " +(int)min + " nits" + "\n" + "Max : " +(int)max + " nits";
+        return "Min : " + (int) min + " nits" + "\n" + "Max : " + (int) max + " nits";
     }
-    private String getRefreshRate(){
+
+    private String getRefreshRate() {
 
         int currRefreshRate = (int) display.getMode().getRefreshRate();
 
         return currRefreshRate + " Hz";
     }
-    private String getColorGamut(){
+
+    private String getColorGamut() {
         StringBuilder wideColorGamut = new StringBuilder();
         wideColorGamut.append("Display : ");
-        if(display.isWideColorGamut()){
+        if (display.isWideColorGamut()) {
             wideColorGamut.append("Supported").append("\n");
-        }
-        else wideColorGamut.append("N/A").append("\n");
+        } else wideColorGamut.append("N/A").append("\n");
         wideColorGamut.append("Device : ");
-        if(config.isScreenWideColorGamut()) wideColorGamut.append("Supported");
+        if (config.isScreenWideColorGamut()) wideColorGamut.append("Supported");
         else wideColorGamut.append("N/A");
 
         return wideColorGamut.toString();
     }
-    private String getDisplayModes(){
+
+    private String getDisplayModes() {
         Display.Mode[] modes = display.getSupportedModes();
         StringBuilder displayModes = new StringBuilder();
-        for(Display.Mode mode : modes){
-             displayModes.append(mode.getPhysicalHeight()).append(" x ").append(mode.getPhysicalWidth())
-                     .append(" @ ").append((int) mode.getRefreshRate()).append(" Hz").append("\n");
+        for (Display.Mode mode : modes) {
+            displayModes.append(mode.getPhysicalHeight()).append(" x ").append(mode.getPhysicalWidth())
+                    .append(" @ ").append((int) mode.getRefreshRate()).append(" Hz").append("\n");
         }
         return displayModes.toString().trim();
     }
-    private String getModel(){
+
+    private String getModel() {
 
         return Build.BRAND + " " + Build.DEVICE;
     }
