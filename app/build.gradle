@@ -9,8 +9,8 @@ android {
         applicationId "com.drhowdydoo.displayinfo"
         minSdk 27
         targetSdk 33
-        versionCode 11
-        versionName "2.1"
+        versionCode 14
+        versionName "2.2"
 
     }
 
@@ -29,6 +29,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.drhowdydoo.displayinfo'
 }
 
 dependencies {

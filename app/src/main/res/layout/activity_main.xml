@@ -370,7 +370,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/title_body_gap"
-                            android:gravity="center"
+                            android:gravity="start"
+                            android:layout_gravity="center"
                             android:textAppearance="@style/TextAppearance.Body"
                             android:text="N/A"
                             />
@@ -469,7 +470,8 @@
                             android:id="@+id/textView_wcg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="start"
+                            android:layout_gravity="center"
                             android:layout_marginTop="@dimen/title_body_gap"
                             android:textAppearance="@style/TextAppearance.Body"
                             android:text="N/A"
@@ -513,7 +515,8 @@
                         android:id="@+id/textView_modes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:gravity="start"
+                        android:layout_gravity="center"
                         android:text="N/A"
                         android:layout_marginTop="@dimen/title_body_gap"
                         android:textAppearance="@style/TextAppearance.Body"/>
@@ -534,6 +537,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:drawablePadding="8dp"
                     android:text="Swipe to check Touch Sampling Rate"
                     app:drawableTopCompat="@drawable/round_swipe_24" />
@@ -550,6 +554,42 @@
                     android:text="Get an estimate"
                     android:layout_gravity="center|bottom"
                     />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:gravity="start"
+                    android:layout_gravity="start"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_scrolling_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="Disable scrolling for better touch sampling ?"
+                        app:drawableLeftCompat="@drawable/round_code_off_24" />
+
+                    <Button
+                        android:id="@+id/btn_disable_scroll"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Disable"/>
+
+                </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 

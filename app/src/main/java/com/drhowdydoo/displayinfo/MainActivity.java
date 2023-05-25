@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     private long touchSampleRate = 0;
     private long actualTouchSampleRate = 0;
 
+    private long estimatedTouchSamplingRate = 0;
+
+    private boolean isScrollDisabled = false;
+
     private HashMap<Long, Integer> touchSamples = new HashMap<>();
 
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
@@ -74,44 +78,56 @@ public class MainActivity extends AppCompatActivity {
 
         mainBinding.touchSamplingArea.setOnTouchListener((v, event) -> {
 
+            StringBuilder stringBuilder = new StringBuilder();
+
             if (event.getActionMasked() == MotionEvent.ACTION_MOVE) {
+
                 long eventTime = event.getEventTime();
                 int historySize = event.getHistorySize();
                 if (previousEventTime != 0 && (eventTime - previousEventTime) > 0) {
                     touchSampleRate = 1000 / (eventTime - previousEventTime);
                     actualTouchSampleRate = touchSampleRate * historySize;
-                    mainBinding.txtSwipeGuide.setText("Touch Sampling Rate : " + actualTouchSampleRate + " Hz");
 
                     if (actualTouchSampleRate >= refreshRate) {
                         if (touchSamples.containsKey(actualTouchSampleRate)) {
                             touchSamples.put(actualTouchSampleRate, touchSamples.get(actualTouchSampleRate) + 1);
                         } else touchSamples.put(actualTouchSampleRate, 1);
                     }
+                    long maxKey = -1;
+                    int maxValue = Integer.MIN_VALUE;
+                    for (Map.Entry<Long, Integer> entry : touchSamples.entrySet()) {
+                        long key = entry.getKey();
+                        int value = entry.getValue();
+                        if (value > maxValue) {
+                            maxKey = key;
+                            maxValue = value;
+                        }
+                    }
+                    estimatedTouchSamplingRate = maxKey;
+                    stringBuilder.setLength(0);
+                    stringBuilder.append("Touch Sampling Rate : ").append(actualTouchSampleRate).append(" Hz\n");
+                    if (maxKey > 0) stringBuilder.append("Avg : ").append(maxKey).append(" Hz");
+                    mainBinding.txtSwipeGuide.setText(stringBuilder.toString());
+                    if (estimatedTouchSamplingRate >= refreshRate) {
+                        mainBinding.txtTsrEstimate.setVisibility(View.VISIBLE);
+                    }
                 }
                 previousEventTime = eventTime;
             }
 
             if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                mainBinding.txtTsrEstimate.setVisibility(View.VISIBLE);
                 mainBinding.txtSwipeGuide.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.round_touch_app_24, 0, 0);
             }
 
-            if (event.getActionMasked() == MotionEvent.ACTION_UP) {
-                long maxKey = -1;
-                int maxValue = Integer.MIN_VALUE;
-                for (Map.Entry<Long, Integer> entry : touchSamples.entrySet()) {
-                    long key = entry.getKey();
-                    int value = entry.getValue();
-                    if (value > maxValue) {
-                        maxKey = key;
-                        maxValue = value;
-                    }
-                }
-                mainBinding.txtTsrEstimate.setText(maxKey + " Hz");
+            if (event.getActionMasked() == MotionEvent.ACTION_UP || event.getActionMasked() == MotionEvent.ACTION_CANCEL) {
+                mainBinding.txtTsrEstimate.setText(closestNumber(estimatedTouchSamplingRate,60) + " Hz");
             }
 
             return true;
         });
+
+
+        mainBinding.txtTsrEstimate.setOnClickListener(v -> mainBinding.txtTsrEstimate.setText(closestNumber(estimatedTouchSamplingRate,60) + " Hz"));
 
         boolean showInfo = preferences.getBoolean("com.drhowdydoo.displayinfo.showInfo", true);
         if (showInfo) {
@@ -121,6 +137,25 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.btnInfoDismiss.setOnClickListener(v -> {
             mainBinding.tsrInfoCard.setVisibility(View.GONE);
             editor.putBoolean("com.drhowdydoo.displayinfo.showInfo", false).apply();
+        });
+
+        mainBinding.btnDisableScroll.setOnClickListener(v -> {
+            isScrollDisabled = !isScrollDisabled;
+            if (isScrollDisabled) {
+                mainBinding.btnDisableScroll.setText("Enable");
+                mainBinding.txtScrollingToggle.setText("Enable scrolling again?");
+                mainBinding.txtScrollingToggle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.round_code_24,0,0,0);
+            } else {
+                mainBinding.btnDisableScroll.setText("Disable");
+                mainBinding.txtScrollingToggle.setText("Disable scrolling for better touch sampling ?");
+                mainBinding.txtScrollingToggle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.round_code_off_24,0,0,0);
+            }
+        });
+
+
+        mainBinding.scrollView.setOnTouchListener((v, event) -> {
+            if (isScrollDisabled) mainBinding.touchSamplingArea.dispatchTouchEvent(event);
+            return isScrollDisabled;
         });
 
     }
@@ -228,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         float min = display.getHdrCapabilities().getDesiredMinLuminance();
         float max = display.getHdrCapabilities().getDesiredMaxLuminance();
 
-        return "Min : " + (int) min + " nits" + "\n" + "Max : " + (int) max + " nits";
+        return " Min : " + (int) min + " nits" + "\n" + "Max : " + (int) max + " nits";
     }
 
     private String getRefreshRate() {
@@ -244,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
         if (display.isWideColorGamut()) {
             wideColorGamut.append("Supported").append("\n");
         } else wideColorGamut.append("N/A").append("\n");
-        wideColorGamut.append("Device : ");
+        wideColorGamut.append("Device  : ");
         if (config.isScreenWideColorGamut()) wideColorGamut.append("Supported");
         else wideColorGamut.append("N/A");
 
@@ -264,6 +299,19 @@ public class MainActivity extends AppCompatActivity {
     private String getModel() {
 
         return Build.BRAND + " " + Build.DEVICE;
+    }
+
+    private int closestNumber(long n, int m)
+    {
+
+        int q = (int) (n / m);
+        int n1 = m * q;
+        int n2 = (n * m) > 0 ? (m * (q + 1)) : (m * (q - 1));
+
+        if (Math.abs(n - n1) < Math.abs(n - n2))
+            return n1;
+
+        return n2;
     }
 
 }
